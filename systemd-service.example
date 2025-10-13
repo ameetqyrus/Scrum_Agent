@@ -1,0 +1,38 @@
+# Example systemd service file for running Scrum Agent as a background service
+# 
+# Installation:
+# 1. Edit the paths and user in this file
+# 2. Copy to /etc/systemd/system/scrum-agent.service
+# 3. Run: sudo systemctl daemon-reload
+# 4. Run: sudo systemctl enable scrum-agent
+# 5. Run: sudo systemctl start scrum-agent
+# 
+# Check status: sudo systemctl status scrum-agent
+# View logs: sudo journalctl -u scrum-agent -f
+
+[Unit]
+Description=Scrum Master Agent
+After=network.target
+
+[Service]
+Type=simple
+User=YOUR_USERNAME
+Group=YOUR_USERNAME
+WorkingDirectory=/Users/ameetdeshpande/Documents/codeProjects/2025/Agents/scrum_agent
+Environment="PATH=/Users/ameetdeshpande/Documents/codeProjects/2025/Agents/scrum_agent/venv/bin"
+ExecStart=/Users/ameetdeshpande/Documents/codeProjects/2025/Agents/scrum_agent/venv/bin/python -m src.main web
+Restart=always
+RestartSec=10
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+
+

@@ -1,0 +1,105 @@
+# Scrum Agent Configuration
+
+# Application Settings
+app:
+  name: "Scrum Master Agent"
+  host: "0.0.0.0"
+  port: 8000
+  debug: false
+  timezone: "America/New_York"  # Change to your local timezone
+
+# Database Settings
+database:
+  path: "scrum_agent.db"
+
+# Scheduler Settings
+scheduler:
+  enabled: true  # Set to false to disable daemon mode
+  timezone: "America/New_York"  # Change to your local timezone
+
+# Daily Report Settings
+daily_report:
+  enabled: true
+  time: "21:00"  # 9 PM in 24-hour format
+  delivery_methods:
+    - "email"  # Options: email, file, console
+  # - "file"
+  include:
+    - "completed_tickets"
+    - "new_tickets"
+    - "comments_summary"
+    - "time_logged"
+    - "blockers"
+    - "in_progress_tickets"
+  file_path: "reports/daily_report_{date}.html"
+
+# Dashboard Settings
+dashboard:
+  enabled: true
+  refresh_interval_minutes: 60  # Refresh every 1 hour
+  lookback_days: 30  # How many days to look back for ticket history
+  filters:
+    - "assigned_to_me"
+    - "mentioned_in_comments"
+    - "watching"
+
+# Follow-up Settings
+follow_up:
+  enabled: true
+  check_time: "10:00"  # Check at 10 AM daily
+  inactive_threshold_hours: 24  # No update for 24 hours
+  delivery_methods:
+    - "jira_comment"
+    - "email"
+  # - "slack"
+  comment_template: |
+    👋 Hi team, this ticket hasn't been updated in the last 24 hours.
+    
+    Could you please provide a status update? If you're blocked, please let us know so we can help.
+    
+    Thanks!
+    - Your Friendly Scrum Master Agent 🤖
+  exclude_statuses:  # Don't follow up on these statuses
+    - "Done"
+    - "Closed"
+    - "Resolved"
+
+# Chatbot Settings
+chatbot:
+  enabled: true
+  model: "gpt-4"
+  # GPT-5 uses reasoning tokens internally - need higher limit for reasoning + visible output
+  max_tokens: 4000
+  temperature: 0.7
+  system_prompt: |
+    You are a helpful Scrum Master assistant. You help teams with agile methodologies,
+    sprint planning, daily standups, retrospectives, and tracking progress.
+    
+    Focus on:
+    - Providing insights on sprint progress and velocity
+    - Explaining scrum ceremonies and best practices
+    - Helping identify blockers and risks
+    - Suggesting improvements for team efficiency
+    
+    Be concise, actionable, and supportive.
+
+# Jira API Settings
+jira:
+  rate_limit:
+    calls_per_minute: 60  # Conservative limit to avoid hitting Jira API limits
+    calls_per_hour: 3000
+  batch_size: 50  # Number of issues to fetch per request
+  max_results: 100  # Maximum results for searches
+
+# Email Settings
+email:
+  enabled: true
+  use_html: true
+  reply_to: null  # Optional reply-to address
+
+# Logging Settings
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  file: "scrum_agent.log"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrum Master Agent</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-left">
+                <h1>🤖 Scrum Master Agent</h1>
+                <p class="subtitle">Your AI-powered agile assistant</p>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <span class="user-icon">👤</span>
+                    <span class="username" id="currentUser">Loading...</span>
+                    <button id="logoutBtn" class="btn-logout">🚪 Logout</button>
+                </div>
+            </div>
+        </header>
+        
+        <div class="action-bar">
+            <button id="refreshBtn" class="btn btn-primary">🔄 Refresh Dashboard</button>
+            <button id="generateReportBtn" class="btn btn-secondary">📊 Generate Report</button>
+            <button id="checkFollowUpBtn" class="btn btn-secondary">⏰ Check Follow-ups</button>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Dashboard Section -->
+            <section class="dashboard-section">
+                <h2>📈 Dashboard</h2>
+                <div id="loading" class="loading">Loading dashboard data...</div>
+                <div id="error" class="error-message" style="display:none;"></div>
+                
+                <!-- Stats Cards -->
+                <div id="statsCards" class="stats-grid" style="display:none;">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalAssigned">0</div>
+                        <div class="stat-label">Assigned to Me</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalMentioned">0</div>
+                        <div class="stat-label">Mentioned in Comments</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="sprintTotal">0</div>
+                        <div class="stat-label">Sprint Issues</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="sprintCompletion">0%</div>
+                        <div class="stat-label">Sprint Progress</div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab-button active" data-tab="assigned">Assigned to Me</button>
+                    <button class="tab-button" data-tab="mentioned">Mentioned</button>
+                    <button class="tab-button" data-tab="sprint">Sprint Stats</button>
+                    <button class="tab-button" data-tab="activity">Recent Activity</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <div id="assigned" class="tab-pane active">
+                        <div id="assignedIssues" class="issues-list"></div>
+                    </div>
+                    <div id="mentioned" class="tab-pane">
+                        <div id="mentionedIssues" class="issues-list"></div>
+                    </div>
+                    <div id="sprint" class="tab-pane">
+                        <div id="sprintStats"></div>
+                    </div>
+                    <div id="activity" class="tab-pane">
+                        <div id="recentActivity" class="issues-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Chatbot Section -->
+            <section class="chatbot-section">
+                <h2>💬 Scrum Assistant</h2>
+                
+                <!-- Suggested Questions -->
+                <div id="suggestions" class="suggestions">
+                    <p>Try asking:</p>
+                    <div id="suggestionButtons" class="suggestion-buttons"></div>
+                </div>
+
+                <!-- Chat Messages -->
+                <div id="chatMessages" class="chat-messages"></div>
+
+                <!-- Chat Input -->
+                <div class="chat-input">
+                    <input 
+                        type="text" 
+                        id="chatInput" 
+                        placeholder="Ask me anything about your scrum process..."
+                        autocomplete="off"
+                    >
+                    <button id="sendBtn" class="btn btn-primary">Send</button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Last updated: <span id="lastUpdated">-</span></p>
+            <p>Status: <span id="status" class="status-indicator">●</span></p>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
+
+

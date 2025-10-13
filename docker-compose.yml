@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  scrum-agent:
+    build: .
+    container_name: scrum-agent
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount config directory for credentials
+      - ./config:/app/config
+      # Mount database to persist data
+      - ./scrum_agent.db:/app/scrum_agent.db
+      # Mount reports directory
+      - ./reports:/app/reports
+      # Mount logs
+      - ./scrum_agent.log:/app/scrum_agent.log
+    environment:
+      - TZ=America/New_York  # Change to your timezone
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/api/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+

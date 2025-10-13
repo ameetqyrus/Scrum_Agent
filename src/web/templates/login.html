@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Scrum Master Agent</title>
+    <link rel="stylesheet" href="/static/login.css">
+</head>
+<body>
+    <div class="background-pattern">
+        <!-- Decorative cards in background -->
+        <div class="demo-card demo-card-1">
+            <div class="card-badge">SPRINT</div>
+            <div class="card-content">
+                <div class="card-icon">📊</div>
+                <p class="card-text">Track your team's velocity and sprint progress</p>
+            </div>
+        </div>
+        <div class="demo-card demo-card-2">
+            <div class="card-badge">AI</div>
+            <div class="card-content">
+                <div class="card-icon">🤖</div>
+                <p class="card-text">AI-powered insights and recommendations</p>
+            </div>
+        </div>
+        <div class="demo-card demo-card-3">
+            <div class="card-badge">JIRA</div>
+            <div class="card-content">
+                <div class="card-icon">🎯</div>
+                <p class="card-text">Seamless Jira integration and automation</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">🤖</div>
+                <h1>Welcome to Scrum Master Agent</h1>
+                <p class="subtitle">Hi 👋, let's manage your agile workflow!</p>
+            </div>
+
+            <form id="loginForm" class="login-form">
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+                
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            placeholder="Enter your username"
+                            value="admin"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="••••••••••••••••"
+                            value="admin123"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-signin" id="signinBtn">
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-loader" style="display: none;">⏳</span>
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p class="powered-by">Powered by <strong>Scrum Master Agent</strong></p>
+                <p class="description">AI-powered agile assistant for your team</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/login.js"></script>
+</body>
+</html>
+
+
