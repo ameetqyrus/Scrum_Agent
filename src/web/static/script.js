@@ -186,7 +186,7 @@ function renderIssues(issues, containerId) {
     const container = document.getElementById(containerId);
     
     if (!issues || issues.length === 0) {
-        container.innerHTML = '<p style="color: #666; padding: 20px; text-align: center;">No issues found</p>';
+        container.innerHTML = '<p style="color: var(--ink-3); padding: 20px; text-align: center; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;">No issues found</p>';
         return;
     }
     
@@ -208,7 +208,7 @@ function renderSprintStats(stats) {
     const container = document.getElementById('sprintStats');
     
     if (!stats || Object.keys(stats).length === 0) {
-        container.innerHTML = '<p style="color: #666; padding: 20px; text-align: center;">No active sprint data available</p>';
+        container.innerHTML = '<p style="color: var(--ink-3); padding: 20px; text-align: center; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;">No active sprint data available</p>';
         return;
     }
     
@@ -427,11 +427,13 @@ async function checkHealth() {
         const data = await response.json();
         
         const indicator = document.getElementById('status');
-        indicator.style.color = data.status === 'healthy' ? '#4caf50' : '#f44336';
-        
+        indicator.style.color = data.status === 'healthy'
+            ? 'var(--green)'
+            : 'var(--red)';
+
     } catch (error) {
         console.error('Error checking health:', error);
-        document.getElementById('status').style.color = '#f44336';
+        document.getElementById('status').style.color = 'var(--red)';
     }
 }
 
